@@ -29,10 +29,12 @@ int main()
 
     BS(arr, n);
 
-       for (int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
         cout << arr[i] << " ";
     }
+
+    cout << "boob";
 
     return 0;
 }
