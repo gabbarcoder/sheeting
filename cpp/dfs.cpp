@@ -1,33 +1,58 @@
-#include <bits/stdc++.h>
 
+
+#include <iostream>
+#include <list>
 using namespace std;
 
-void dfs(int node, vector<int> adj[], int vis[], vector<int> &ls)
+class Graph
 {
-    vis[node] = 1;
+    int numVertices;
+    list<int> *adjLists;
+    bool *visited;
 
-    ls.push_back(node);
+public:
+    Graph(int V);
+    void addEdge(int src, int dest);
+    void DFS(int vertex);
+};
 
-    for (auto it : adj[node])
-    {
-        if (!vis[it])
-        {
-            dfs(it, adj, vis, ls);
-        }
-    }
+
+Graph::Graph(int vertices)
+{
+    numVertices = vertices;
+    adjLists = new list<int>[vertices];
+    visited = new bool[vertices];
 }
 
-void dfsofgraph(int V, vector<int> adj[])
-{
-    int vis[n] = {0};
-    int start = {0};
-    vector<int> ls;
 
-    dfs(start, adj[], vis, ls);
+void Graph::addEdge(int src, int dest)
+{
+    adjLists[src].push_front(dest);
+}
+
+
+void Graph::DFS(int vertex)
+{
+    visited[vertex] = true;
+    list<int> adjList = adjLists[vertex];
+
+    cout << vertex << " ";
+
+    list<int>::iterator i;
+    for (i = adjList.begin(); i != adjList.end(); ++i)
+        if (!visited[*i])
+            DFS(*i);
 }
 
 int main()
-{   
-    
+{
+    Graph g(4);
+    g.addEdge(0, 1);
+    g.addEdge(0, 2);
+    g.addEdge(1, 2);
+    g.addEdge(2, 3);
+
+    g.DFS(2);
+
     return 0;
 }
