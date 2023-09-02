@@ -1,0 +1,2 @@
+Answer for 8 queen:
+
